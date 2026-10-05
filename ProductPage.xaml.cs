@@ -25,6 +25,14 @@ namespace SavelyevShoes
             InitializeComponent();
             var currentProducts= SavelyevShoesEntities.GetContext().Product.ToList();
 
+            foreach(var p in currentProducts)
+            {
+                if (p.ProductName != null)
+                {
+                    p.ProductName = p.ProductName.Replace("\r", " ").Replace("\n"," ").Replace("  ", " ");
+                }
+            }
+
             ProductListView.ItemsSource = currentProducts;
         }
     }

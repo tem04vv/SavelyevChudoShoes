@@ -64,9 +64,54 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Category.cs">
+      <DependentUpon>SavelyevModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Manager.cs" />
+    <Compile Include="Manufacturer.cs">
+      <DependentUpon>SavelyevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>SavelyevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderItem.cs">
+      <DependentUpon>SavelyevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>SavelyevModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>SavelyevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SavelyevModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SavelyevModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SavelyevModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SavelyevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SavelyevModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SavelyevModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Size.cs">
+      <DependentUpon>SavelyevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StockItem.cs">
+      <DependentUpon>SavelyevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Subcategory.cs">
+      <DependentUpon>SavelyevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>SavelyevModel.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -107,6 +152,13 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="SavelyevModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SavelyevModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="SavelyevModel.edmx.diagram">
+      <DependentUpon>SavelyevModel.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +207,18 @@
     <Resource Include="Images\IMG_WS_185528.png" />
     <Resource Include="Images\IMG_WS_185535.png" />
     <Resource Include="Images\IMG_WS_185538.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SavelyevModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SavelyevModel.edmx</DependentUpon>
+      <LastGenOutput>SavelyevModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SavelyevModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SavelyevModel.edmx</DependentUpon>
+      <LastGenOutput>SavelyevModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
