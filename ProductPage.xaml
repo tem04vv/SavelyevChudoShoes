@@ -5,32 +5,81 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SavelyevShoes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="900"
       Title="ShoesPage" FontFamily="Calibri">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListView Name="ProductListView" Grid.Row="1">
+        <Grid Grid.Row="0" Background="#D2F6E7">
+            <TextBlock Grid.Row="0" Name="UserInfoTextBlock" FontSize="17" HorizontalAlignment="Left" Margin="10,0,0,0"></TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="#D2F6E7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="270"/>
+                <ColumnDefinition Width="215"/>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.ColumnSpan="2">
+                <TextBlock Text="Поиск:" FontSize="17"></TextBlock>
+                <TextBox Name="SearchTextBox" Height="20" Width="250" HorizontalAlignment="Left" TextChanged="SearchTextBox_TextChanged"></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" Margin="5,0,0,0">
+                <TextBlock Text="Сортировка:" FontSize="17"></TextBlock>
+                <ComboBox Name="SortComboBox" Width="200" SelectionChanged="SortComboBox_SelectionChanged">
+                    <TextBlock Text="Без сортировки" FontSize="15"></TextBlock>
+                    <TextBlock Text="Цена по убыванию" FontSize="15"></TextBlock>
+                    <TextBlock Text="Цена по возрастанию" FontSize="15"></TextBlock>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left" Margin="5,0,0,0">
+                <TextBlock Text="Фильтрация:" FontSize="17"></TextBlock>
+                <ComboBox Name="FilterComboBox" Width="200" SelectionChanged="FilterComboBox_SelectionChanged">
+                    <TextBlock Text="Без фильтрации" FontSize="15"></TextBlock>
+                    <TextBlock Text="Детская обувь" FontSize="15"></TextBlock>
+                    <TextBlock Text="Женская обувь" FontSize="15"></TextBlock>
+                    <TextBlock Text="Мужская обувь" FontSize="15"></TextBlock>
+                </ComboBox>
+            </StackPanel>
+            <Button Grid.Column="3" Width="130" Content="Корзина" Name="ShopBasketBtn" HorizontalAlignment="Center" 
+                    Click="ShopBasketBtn_Click" Visibility="Collapsed"></Button>
+            <Button Grid.Column="4" Width="130" Content="Все заказы" Name="AllOrdersBtn" HorizontalAlignment="Right" Margin="5" 
+                    Click="AllOrdersBtn_Click" Visibility="Collapsed"></Button>
+        </Grid>
+
+
+
+        <ListView Name="ProductListView" Grid.Row="2" ContextMenuOpening="ProductListView_ContextMenuOpening">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить к заказу" Click="MenuItem_Click"></MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="500"/>
-                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27"/>
                         </Grid.RowDefinitions>
-                        <Image Width="150" Height="150" Grid.Column="0" Grid.RowSpan="4" Stretch="UniformToFill" HorizontalAlignment="Center">
+                        <Image Width="155" Height="165" Grid.Column="0" Grid.RowSpan="6" Stretch="UniformToFill" HorizontalAlignment="Center">
                             <Image.Source>
                                 <Binding Path="ProductPhotoPath">
                                     <Binding.TargetNullValue>
@@ -42,7 +91,7 @@
                             </Image.Source>
                         </Image>
 
-                        <Grid Grid.Column="1" Grid.Row="0">
+                        <Grid Grid.Column="1" Grid.Row="0" Margin="5,0,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
@@ -51,10 +100,11 @@
                             <TextBlock Grid.Column="1" Text="{Binding ProductName}" FontSize="20" FontWeight="Bold" TextWrapping="Wrap"></TextBlock>
                         </Grid>
 
-                        <TextBlock Text="{Binding Category.CategoryName}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="17"></TextBlock>
-                        <TextBlock Text="{Binding Subcategory.SubcategoryName}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" FontSize="17"></TextBlock>
-                        <TextBlock Text="{Binding Size.Size}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" FontSize="15"></TextBlock>
-                        <TextBlock Text="{Binding Price}" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" FontSize="15"></TextBlock>
+                        <TextBlock Text="{Binding Category.CategoryName, StringFormat={}Категория: {0} }" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="17" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Text="{Binding Subcategory.SubcategoryName,StringFormat={}Подкатегория: {0} }" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" FontSize="17" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Text="{Binding Manufacturer.ManufacturerName,StringFormat={}Производство: {0} }" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" FontSize="17" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" FontSize="17" Text="{Binding SizesList, StringFormat={}Размеры: {0}}" Margin="5,0,0,0"/>
+                        <TextBlock Text="{Binding Price, StringFormat={}Цена: {0} рублей (за 1 шт.)}" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" FontSize="17" Margin="5,0,0,0"></TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

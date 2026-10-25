@@ -22,6 +22,14 @@ namespace SavelyevShoes
     
         public int ID_Size { get; set; }
         public decimal Size1 { get; set; }
+
+        public string SizeDisplay
+        { 
+            get
+            {
+                return Size1.ToString("0.#").Replace(",",".");
+            }
+        }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockItem> StockItem { get; set; }

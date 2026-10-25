@@ -24,7 +24,17 @@ namespace SavelyevShoes
         public int OrderNumber { get; set; }
         public System.DateTime OrderDate { get; set; }
         public int ID_User { get; set; }
-    
+        public string UserFullName
+        {
+            get
+            {
+                if (User == null)
+                {
+                    return "";
+                }
+                return $"{User.Surname} {User.Name} {User.Patronymic}";
+            }
+        }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItem { get; set; }

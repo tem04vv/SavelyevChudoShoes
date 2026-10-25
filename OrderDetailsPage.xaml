@@ -1,0 +1,50 @@
+﻿<Page x:Class="SavelyevShoes.OrderDetailsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SavelyevShoes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OrderDetailsPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Состав заказа" Grid.Row="0" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="250"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="ID Заказа" Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="Номер Заказа" Grid.Column="1" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="Дата Заказа" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="ФИО Покупателя" Grid.Column="3" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        </Grid>
+        <ListView Grid.Row="2" Name="OrderListView" MouseDoubleClick="OrderListView_MouseDoubleClick">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{Binding ID_Order}" Grid.Column="0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{Binding OrderNumber}" Grid.Column="1" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{Binding OrderDate, StringFormat={}{0:dd.MM.yyyy}}" Grid.Column="2" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{Binding UserFullName}" Grid.Column="3" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

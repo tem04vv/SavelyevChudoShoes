@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SavelyevShoes"
         mc:Ignorable="d"
-        Title="Чудо Обувь" Height="450" Width="800" FontFamily="Calibri" Icon="res/Чудо Обувь.ico">
+        Title="Чудо Обувь" Height="450" Width="900" FontFamily="Calibri" Icon="res/Чудо Обувь.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
