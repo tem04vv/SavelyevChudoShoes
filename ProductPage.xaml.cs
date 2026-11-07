@@ -101,6 +101,14 @@ namespace SavelyevShoes
         {
             int id = stockItem.ID_StockItem;
 
+            int countInBasket = _orderItems.ContainsKey(id) ? _orderItems[id] : 0;
+
+            if (stockItem.AvailableQuantity <= countInBasket)
+            {
+                MessageBox.Show("Этого размера больше нет на складе!");
+                return; 
+            }
+
             if (_orderItems.ContainsKey(id))
             {
                 _orderItems[id]++;
@@ -193,6 +201,7 @@ namespace SavelyevShoes
             {
                 _orderItems.Clear();
                 UpdateShopBasketButtonVisibility();
+                UpdateProducts();
             }
         }
 
@@ -206,7 +215,7 @@ namespace SavelyevShoes
 
         private void AllOrdersBtn_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new OrdersPage());
+            Manager.MainFrame.Navigate(new OrdersPage(_currentUser));
         }
     }
 }

@@ -18,7 +18,14 @@ namespace SavelyevShoes
         public int ID_Order { get; set; }
         public int ID_StockItem { get; set; }
         public int Quantity { get; set; }
-    
+
+        public decimal TotalPrice
+        {
+            get
+            {
+                return StockItem.Product.Price * Quantity;
+            }
+        }
         public virtual Order Order { get; set; }
         public virtual StockItem StockItem { get; set; }
     }

@@ -11,40 +11,74 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="90"/>
             <RowDefinition Height="45"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="45"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Состав заказа" Grid.Row="0" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="130"/>
-                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="ID Заказа" Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="Номер Заказа" Grid.Column="1" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="Дата Заказа" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="ФИО Покупателя" Grid.Column="3" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Номер Заказа: " Grid.Row="0" FontSize="15" HorizontalAlignment="Left" Margin="5"></TextBlock>
+            <TextBlock Text="Дата Заказа: " Grid.Row="1" FontSize="15" HorizontalAlignment="Left" Margin="5"></TextBlock>
+            <TextBlock Text="Клиент: " Grid.Row="2" FontSize="15" HorizontalAlignment="Left" Margin="5"></TextBlock>
+
+            <TextBlock Name="OrderNumberTB" Grid.Column="1" Grid.Row="0" FontSize="15" HorizontalAlignment="Left" Margin="5"></TextBlock>
+            <TextBlock Name="OrderDateTB" Grid.Column="1" Grid.Row="1" FontSize="15" HorizontalAlignment="Left" Margin="5"></TextBlock>
+            <TextBlock Name="ClientNameTB" Grid.Column="1" Grid.Row="2" FontSize="15" HorizontalAlignment="Left" Margin="5"></TextBlock>
         </Grid>
-        <ListView Grid.Row="2" Name="OrderListView" MouseDoubleClick="OrderListView_MouseDoubleClick">
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="550"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="155"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Наименование товара" Grid.Column="0" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="Размер" Grid.Column="1" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="Количество" Grid.Column="2" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="Цена за единицу" Grid.Column="3" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="Сумма по строке" Grid.Column="4" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+          
+        </Grid>
+        <ListView Grid.Row="3" Name="OrderDetailsListView">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="550"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="150"/>
-                            <ColumnDefinition Width="130"/>
-                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="155"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="155"/>
                         </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding StockItem.Product.ProductName}" Grid.Column="0" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{Binding StockItem.Size.SizeDisplay}" Grid.Column="1" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{Binding Quantity}" Grid.Column="2" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{Binding StockItem.Product.Price, StringFormat={}{0} руб.}" Grid.Column="3" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{Binding TotalPrice, StringFormat={}{0} руб.}" Grid.Column="4" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <Button Content="+" Name="AddCountBtn" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="30" Click="AddCountBtn_Click"></Button>
+                        <TextBlock Text="Изменить кол-во" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Grid.Column="6"></TextBlock>
+                        <Button Content="-" Name="SubtractCountBtn" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="30" Click="SubtractCountBtn_Click"></Button>
+                        <Button Background="Red" Width="110" Content="Удалить" Name="DeleteBtn" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" Click="DeleteBtn_Click"></Button>
 
-                        <TextBlock Text="{Binding ID_Order}" Grid.Column="0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        <TextBlock Text="{Binding OrderNumber}" Grid.Column="1" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        <TextBlock Text="{Binding OrderDate, StringFormat={}{0:dd.MM.yyyy}}" Grid.Column="2" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        <TextBlock Text="{Binding UserFullName}" Grid.Column="3" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <TextBlock Name="TotalSumTB" Grid.Row="4" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center"></TextBlock>
     </Grid>
 </Page>
