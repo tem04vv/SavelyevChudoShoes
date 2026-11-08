@@ -44,6 +44,11 @@ namespace SavelyevShoes
             {
                 AllOrdersBtn.Visibility = Visibility.Visible;
             }
+            if (user != null && user.Role.Role1 == "Администратор")
+            {
+                AnalyticsBtn.Visibility = Visibility.Visible;
+            }
+
             var currentProducts= SavelyevShoesEntities.GetContext().Product
                 .Include(p => p.StockItem.Select(s => s.Size))
                 .ToList();
@@ -216,6 +221,11 @@ namespace SavelyevShoes
         private void AllOrdersBtn_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new OrdersPage(_currentUser));
+        }
+
+        private void AnalyticsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new AnalyticsPage());
         }
     }
 }

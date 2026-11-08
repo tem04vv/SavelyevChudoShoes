@@ -52,8 +52,6 @@
             </StackPanel>
             <Button Grid.Column="3" Width="130" Content="Корзина" Name="ShopBasketBtn" HorizontalAlignment="Center" 
                     Click="ShopBasketBtn_Click" Visibility="Collapsed"></Button>
-            <Button Grid.Column="4" Width="130" Content="Все заказы" Name="AllOrdersBtn" HorizontalAlignment="Right" Margin="5" 
-                    Click="AllOrdersBtn_Click" Visibility="Collapsed"></Button>
         </Grid>
 
 
@@ -109,5 +107,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
+            <Button Width="130" Content="Все заказы" Name="AllOrdersBtn" Click="AllOrdersBtn_Click" Visibility="Collapsed"></Button>
+            <Button  Width="130" Content="Аналитика" Name="AnalyticsBtn" Click="AnalyticsBtn_Click" Visibility="Collapsed"></Button>
+        </StackPanel>
+        
     </Grid>
 </Page>

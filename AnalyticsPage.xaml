@@ -1,0 +1,82 @@
+﻿<Page x:Class="SavelyevShoes.AnalyticsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SavelyevShoes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="900"
+      Title="AnalyticsPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Аналитика продаж" Grid.Row="0" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Период с:" FontSize="16" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <DatePicker Name="StartDatePicker" Width="150" SelectedDateChanged="StartDatePicker_SelectedDateChanged" />
+
+            <TextBlock Text="по:" FontSize="16" VerticalAlignment="Center" Margin="20,0,5,0"/>
+            <DatePicker Name="EndDatePicker" Width="150" SelectedDateChanged="EndDatePicker_SelectedDateChanged"/>
+        </StackPanel>
+
+        <Grid Grid.Row="2" Margin="20,10,20,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="5" Background="#D2F6E7">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Всего заказов:" FontSize="18" HorizontalAlignment="Center"/>
+                    <TextBlock Name="TotalOrdersTB" Text="0" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="5" Background="#D2F6E7">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Общая сумма продаж:" FontSize="18" HorizontalAlignment="Center"/>
+                    <TextBlock Name="TotalSumTB" Text="0.00 руб." FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="550"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Наименование модели" Grid.Column="0" FontSize="17" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="Производитель" Grid.Column="1" FontSize="17" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="Кол-во пар" Grid.Column="2" FontSize="17" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
+        <ListView Grid.Row="4" Name="TopProductsListView" Margin="0,5,0,5">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="550"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding ModelName}" Grid.Column="0" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                        <TextBlock Text="{Binding ManufacturerName}" Grid.Column="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding TotalQuantity}" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Grid.Row="5" Name="ExportPdfBtn" Content="Экспорт в PDF" Width="200" Height="35" HorizontalAlignment="Center" Click="ExportPdfBtn_Click"/>
+    </Grid>
+</Page>
